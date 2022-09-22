@@ -1,9 +1,10 @@
 #include <iostream>
 #include <deque>
 
+
 int main () {
 
-	deque<int>hi(10);
+	std::deque<char>hi(10);
 	for (int i = 0; i < 10; i++) {
 		hi[i] = i + 1;
 	}
@@ -11,6 +12,12 @@ int main () {
 	for (int i = 0; i < 10; i++) { 
 		std::cout << hi[i] << " ";
 	}
+	std::cout << "\n";
 
-	
+	hi[7] = 10;
+
+	// for (int i = 0; i < 11; i++) { 
+	// 	std::cout << hi[i] << " ";
+	// }
+
 }

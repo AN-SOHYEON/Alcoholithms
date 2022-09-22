@@ -15,9 +15,28 @@ deque를 순회할 때 인덱스의 오름차순이 시계방향이도록 한다
 
 using namespace	std;
 
-void	findLocation(deque <char> &lucky, int s, char ch) {
+int	findLocation(deque <char> &lucky, int s, char ch) {
+
+	char	tmp;
 	while (s--) {
-		lucky.push_front(lucky.back());
+		tmp = lucky.back();
+		lucky.push_front(tmp);
+		lucky.pop_back();
+	}
+	if (lucky[0] == '?') { // 아직 아무 알파벳도 들어와있지 않으면 ch를 넣는다. 
+		lucky[0] = ch;
+		for (auto it = lucky.begin() + 1; it != lucky.end(); it++) { // 넣고 난 후 중복이 있는지 확인하고 중복이 있으면 유효하지 않으므로 0을 리턴한다.
+			if (lucky[0] == *it)
+				return 0;
+		}
+		return 1;
+	}
+	else {
+		if (lucky[0] != ch) { // 만일 회전한 자리에 이미 다른 알파벳이 있었다면 잘못된 것이므로 0을 리턴하여 !을 출력하고 종료할 수 있오록 한다. 
+			return 0;
+		}
+		// 같은 알파벳을 떄 
+		return 1;
 	}
 }
 
@@ -25,13 +44,20 @@ int	main () {
 
 	int n, k;
 	cin >> n >> k;
-	deque <char> lucky(n, ?);
+	deque <char> lucky(n, '?');
 
-	int s, 
+	int s; 
 	char ch;
 	while (k--) {
-		scanf("%d %c", s, ch);
-		findLocation(lucky, s, ch);
+		scanf("%d %c", &s, &ch);
+		if(!findLocation(lucky, s, ch)) {	// 유효한 location을 찾지 못하면 (return 0이면) !을 출력하고 종료한다. 
+			cout << "!";
+			return 0;
+		}
+	}
+
+	for (int i = 0; i < n; i++) {
+		cout << lucky[i];
 	}
 
 	return 0;
