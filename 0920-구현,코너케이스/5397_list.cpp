@@ -30,17 +30,18 @@ void	backSpace(list<char> &input, list<char>::iterator &cur) {
 }
 
 void	charactor(list<char> &input, list<char>::iterator &cur, char c) {
-	
-	list<char>::iterator tmp(cur);
-	if (*(++tmp)) {
-		cur = input.insert(cur, c);
-		cur++;
-		// cout << "hi\n";
-	}
-	else {
-		input.push_back(c);
-		// cout << c << "\n";
-	}
+
+	input.insert(cur, c);	
+	// list<char>::iterator tmp(cur);
+	// if (*(++tmp)) {
+	// 	cur = input.insert(cur, c);
+	// 	cur++;
+	// 	// cout << "hi\n";
+	// }
+	// else {
+	// 	input.push_back(c);
+	// 	// cout << c << "\n";
+	// }
 }
 
 string	keyLogger(string input) {
@@ -62,6 +63,7 @@ string	keyLogger(string input) {
 	for (cursor = key.begin(); cursor != key.end(); cursor++) {
 		key_str += *cursor;
 	}
+	key.clear();
 	return (key_str);
 }
 
