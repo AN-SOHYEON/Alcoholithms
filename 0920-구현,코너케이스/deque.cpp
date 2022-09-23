@@ -4,7 +4,9 @@
 
 int main () {
 
-	std::deque<char>hi(10);
+	std::deque<char>hi;
+	std::cout << "back : " << hi.back() << "\n";
+
 	for (int i = 0; i < 10; i++) {
 		hi[i] = i + 1;
 	}
