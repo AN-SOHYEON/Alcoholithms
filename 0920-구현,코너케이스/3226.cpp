@@ -43,7 +43,7 @@ int	calcBill(string time, int dur) {
 	if (hour == 6 || hour == 18) {
 		return (timeToPayBoth(hour, min, dur));
 	}
-	else if (hour > 7 && hour < 18) {
+	else if (hour > 6 && hour < 18) {
 		return (dur * 10);
 	}
 	else {
