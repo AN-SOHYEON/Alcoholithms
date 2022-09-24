@@ -3,6 +3,13 @@
 
 들어가 있는 원소를 다양한 위치에서 삽입, 삭제하는 문제이므로 list를 쓰면 성능이 좋을 것 같다. 
 -> 메모리 초과난다. 
+	원래는 < > - char 에 대해서 동작하는 각각의 함수를 만들고 이터레이터와 리스트를 매개변수로 
+	전댈했는데 계속해서 매개변수로 전달하면 메모리를 (불필요하게)과도하게 사용한다고 해서 전역변수로 선언하였다. 
+
+-> 출력 오류가 난다. 
+	vector에서의 erase는 자동으로 뒤의 값들을 앞으로 당겨와주지만 
+	list의 erase는 다음 노드를 연결해주지 않기 때문에 erase의 반환값을 이터레이터에 받아줘야 계속해서 
+	의도한 계산을 이어갈 수 있음을 알았다. 
 */
 
 #include <iostream>
@@ -10,61 +17,36 @@
 #include <list>
 
 using namespace	std;
+list <char> key;
+list<char>::iterator cur;
 
-void	leftKey(list<char> &input, list<char>::iterator &cur) {
-	if (cur != input.begin()) {
-		cur--;
-	}
-}
+void	keyLogger(string input) {
 
-void	rightKey(list<char> &input, list<char>::iterator &cur) {
-	if (cur != input.end()) {
-		cur++;
-	}
-}
-
-void	backSpace(list<char> &input, list<char>::iterator &cur) {
-	if (cur != input.begin()) {
-		input.erase(--cur);
-	}
-}
-
-void	charactor(list<char> &input, list<char>::iterator &cur, char c) {
-
-	input.insert(cur, c);	
-	// list<char>::iterator tmp(cur);
-	// if (*(++tmp)) {
-	// 	cur = input.insert(cur, c);
-	// 	cur++;
-	// 	// cout << "hi\n";
-	// }
-	// else {
-	// 	input.push_back(c);
-	// 	// cout << c << "\n";
-	// }
-}
-
-string	keyLogger(string input) {
-
-	list <char> key;
-	auto cursor = key.begin();
+	cur = key.begin();
 	for (int i = 0; i < input.size(); i++) {
-		if (input[i] == '<')
-			leftKey(key, cursor);
-		else if (input[i] == '>')
-			rightKey(key, cursor);
-		else if (input[i] == '-')
-			backSpace(key, cursor);
+		if (input[i] == '<') {
+			if (cur != key.begin()) {
+				cur--;
+			}
+		}
+		else if (input[i] == '>') {	
+			if (cur != key.end()) {
+				cur++;
+			}
+		}
+		else if (input[i] == '-') {
+			if (cur != key.begin()) {
+				cur = key.erase(--cur);
+			}
+		}
 		else
-			charactor(key, cursor, input[i]);
+			key.insert(cur, input[i]);
 	}
 
-	string	key_str;
-	for (cursor = key.begin(); cursor != key.end(); cursor++) {
-		key_str += *cursor;
+	for (cur = key.begin(); cur != key.end(); cur++) {
+		cout << *cur;
 	}
 	key.clear();
-	return (key_str);
 }
 
 int	main () {
@@ -75,7 +57,8 @@ int	main () {
 	string	input;
 	while (test--) {
 		cin >> input;
-		cout << keyLogger(input) << "\n";
+		keyLogger(input);
+		cout << "\n";
 	}
 
 	return 0;
