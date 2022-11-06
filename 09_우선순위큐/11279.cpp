@@ -32,7 +32,7 @@ int pop(vector<int> &heap) {
 	
 	// 자식노드가 있는지 확인
 	while (child < size) {
-		if (chile + 1 < size && heap[child + 1] > heap[child]) {
+		if (child + 1 < size && heap[child + 1] > heap[child]) {
 			child += 1;
 		}
 		if (heap[parent] < heap[child]) {
@@ -50,7 +50,7 @@ int pop(vector<int> &heap) {
 
 int main () {
 	int	n, x;
-	cin << n;
+	cin >> n;
 
 	vector <int> vec_heap;
 	vec_heap.push_back(0);

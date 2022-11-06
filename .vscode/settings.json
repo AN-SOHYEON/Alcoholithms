@@ -3,6 +3,7 @@
 	"scm.alwaysShowRepositories": true,
 	"files.associations": {
 		"iostream": "cpp",
-		"deque": "cpp"
+		"deque": "cpp",
+		"string": "cpp"
 	}
 }
