@@ -1,9 +1,0 @@
-{
-	"scm.alwaysShowActions": true,
-	"scm.alwaysShowRepositories": true,
-	"files.associations": {
-		"iostream": "cpp",
-		"deque": "cpp",
-		"string": "cpp"
-	}
-}
